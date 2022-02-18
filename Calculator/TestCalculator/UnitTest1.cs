@@ -79,6 +79,12 @@ namespace TestCalculator
             Assert.AreEqual(Add(1,2,3,4,5,6,7,8,9), calculatorAdd.Add("1,1050,2,3,4,5,6,7,8,9"));
         }
 
+        [Test]
+        public void AddStringDelimeterMoreThenOneSymbol_ReturnsumOfSum_Test1()
+        {
+            Assert.AreEqual(Add(1,2,2,5), calculatorAdd.Add("//[***]\n1***2***2***5"));
+        }
+
         private int Add(params int[] n)
         {
             int sum = 0;

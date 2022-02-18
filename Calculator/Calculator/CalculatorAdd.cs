@@ -16,8 +16,12 @@ namespace Calculator
 
         private string[] Delimetres(string new_str, out string[] values)
         {
-            var symbolToSplit = new_str.Substring(2, 1);
-            values = new_str.Substring(4).Split(symbolToSplit);
+            string[] symbolToSplit;
+            if (new_str.Contains("["))
+                symbolToSplit = new_str.Substring(2, new_str.IndexOf('\n') - 2).Split(new char[] { '[', ']' }, StringSplitOptions.RemoveEmptyEntries);
+            else
+                symbolToSplit = new_str.Substring(2, 1).Split();
+            values = new_str.Substring(new_str.IndexOf('\n') + 1).Split(symbolToSplit, StringSplitOptions.RemoveEmptyEntries);
             return values;
         }
 
