@@ -15,31 +15,51 @@ namespace TestCalculator
         [Test]
         public void AddEmptyString_Return_0()
         {
-            Assert.AreEqual(0, calculatorAdd.Add(""));
+            Assert.AreEqual(Add(), calculatorAdd.Add(""));
         }
 
         [Test]
         public void AddStringWithOneNumber_ReturnValueOfNumber_Test1()
         {
-            Assert.AreEqual(25, calculatorAdd.Add("25"));
+            Assert.AreEqual(Add(25), calculatorAdd.Add("25"));
         }
 
         [Test]
         public void AddStringWithOneNumber_ReturnValueOfNumber_Test2()
         {
-            Assert.AreEqual(-4, calculatorAdd.Add("-4"));
+            Assert.AreEqual(Add(-4), calculatorAdd.Add("-4"));
         }
 
         [Test]
         public void AddStringWithTwoNumbers_ReturnSum_Test1()
         {
-            Assert.AreEqual(17, calculatorAdd.Add("14,3"));
+            Assert.AreEqual(Add(14,3), calculatorAdd.Add("14,3"));
         }
 
         [Test]
         public void AddStringWithTwoNumbers_ReturnSum_Test2()
         {
-            Assert.AreEqual(-2, calculatorAdd.Add("-5,3"));
+            Assert.AreEqual(Add(-5,3), calculatorAdd.Add("-5,3"));
+        }
+
+        [Test]
+        public void AddStringWithUnknownNumbers_ReturnSum_Test1()
+        {
+            Assert.AreEqual(Add(4,2,-10), calculatorAdd.Add("4,2,-10"));
+        }
+
+        [Test]
+        public void AddStringWithUnknownNumbers_ReturnSum_Test2()
+        {
+            Assert.AreEqual(Add(4, 2, -10, 5, 14, 7), calculatorAdd.Add("4,2,-10,5,14,7"));
+        }
+
+        private int Add(params int[] n)
+        {
+            int sum = 0;
+            foreach (int i in n)
+                sum += i;
+            return sum;
         }
     }
 }
