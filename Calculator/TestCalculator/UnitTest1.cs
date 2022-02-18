@@ -29,5 +29,17 @@ namespace TestCalculator
         {
             Assert.AreEqual(-4, calculatorAdd.Add("-4"));
         }
+
+        [Test]
+        public void AddStringWithTwoNumbers_ReturnSum_Test1()
+        {
+            Assert.AreEqual(17, calculatorAdd.Add("14,3"));
+        }
+
+        [Test]
+        public void AddStringWithTwoNumbers_ReturnSum_Test2()
+        {
+            Assert.AreEqual(-2, calculatorAdd.Add("-5,3"));
+        }
     }
 }
