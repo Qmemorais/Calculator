@@ -54,6 +54,19 @@ namespace TestCalculator
             Assert.AreEqual(Add(4, 2, 10, 5, 14, 7), calculatorAdd.Add("4,2,10,5,14,7"));
         }
 
+        [Test]
+        public void AddStringWithLinesBetweenNumbers_ReturnSum_Test1()
+        {
+            Assert.AreEqual(Add(1,5,7), calculatorAdd.Add("1\n5,7"));
+        }
+
+        [Test]
+        public void AddStringWithDelimiter_ReturnSum_Test1()
+        {
+            Assert.AreEqual(Add(1, 5, 7), calculatorAdd.Add("//;\n1;5;7"));
+        }
+
+
         private int Add(params int[] n)
         {
             int sum = 0;
