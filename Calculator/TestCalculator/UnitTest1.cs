@@ -27,7 +27,7 @@ namespace TestCalculator
         [Test]
         public void AddStringWithOneNumber_ReturnValueOfNumber_Test2()
         {
-            Assert.AreEqual(Add(-4), calculatorAdd.Add("-4"));
+            Assert.AreEqual(Add(4), calculatorAdd.Add("4"));
         }
 
         [Test]
@@ -39,19 +39,19 @@ namespace TestCalculator
         [Test]
         public void AddStringWithTwoNumbers_ReturnSum_Test2()
         {
-            Assert.AreEqual(Add(-5,3), calculatorAdd.Add("-5,3"));
+            Assert.AreEqual(Add(5,3), calculatorAdd.Add("5,3"));
         }
 
         [Test]
         public void AddStringWithUnknownNumbers_ReturnSum_Test1()
         {
-            Assert.AreEqual(Add(4,2,-10), calculatorAdd.Add("4,2,-10"));
+            Assert.AreEqual(Add(4,2,10), calculatorAdd.Add("4,2,10"));
         }
 
         [Test]
         public void AddStringWithUnknownNumbers_ReturnSum_Test2()
         {
-            Assert.AreEqual(Add(4, 2, -10, 5, 14, 7), calculatorAdd.Add("4,2,-10,5,14,7"));
+            Assert.AreEqual(Add(4, 2, 10, 5, 14, 7), calculatorAdd.Add("4,2,10,5,14,7"));
         }
 
         private int Add(params int[] n)
