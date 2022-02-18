@@ -17,6 +17,7 @@ namespace ProjectCalculator
             {
                 return values = new List<int>();
             }
+
             List<string> symbolToSplit = new List<string>();
             string numbers;
             string[] valuesString;
@@ -34,7 +35,9 @@ namespace ProjectCalculator
             {
                 valuesString = stringToSplit.Split(new string[] { "\n", "," }, StringSplitOptions.RemoveEmptyEntries);
             }
+
             values = valuesString.Select(x => int.Parse(x)).ToList();
+
             return values;
         }
 
