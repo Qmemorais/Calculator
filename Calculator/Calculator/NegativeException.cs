@@ -1,15 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
-namespace Calculator
+namespace ProjectCalculator
 {
     public class NegativeException : ArgumentException
     {
-        public int[] Value { get; }
-        public NegativeException(string message, params int[] val)
+        public List<int> Value { get; }
+        public NegativeException(string message, List<int> val)
             : base(message)
         {
-            Value = val.Where(x => x < 0).ToArray();
+            Value = val.Where(x => x < 0).ToList();
         }
     }
 }
