@@ -9,11 +9,11 @@ namespace TestCalculator
         [SetUp]
         public void Setup()
         {
-            calculatorAdd = new();
+            calculatorAdd = new CalculatorAdd();
         }
 
         [Test]
-        public void AddEmptyString_Return_0()
+        public void AddEmptyString_Return_zero()
         {
             Assert.AreEqual(Add(), calculatorAdd.Add(""));
         }
@@ -21,6 +21,11 @@ namespace TestCalculator
         [Test]
         public void AddStringWithOneNumber_ReturnValueOfNumber_Test1()
         {
+            //
+
+            //
+
+            //
             Assert.AreEqual(Add(25), calculatorAdd.Add("25"));
         }
 
