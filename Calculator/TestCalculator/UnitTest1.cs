@@ -85,6 +85,18 @@ namespace TestCalculator
             Assert.AreEqual(Add(1,2,2,5), calculatorAdd.Add("//[***]\n1***2***2***5"));
         }
 
+        [Test]
+        public void AddStringMoreThenOneDelimeter_ReturnsumOfSum_Test1()
+        {
+            Assert.AreEqual(Add(1,2,3,1,2), calculatorAdd.Add("//[*][%][s]\n1*2%3ss1s2s"));
+        }
+
+        [Test]
+        public void AddStringMoreThenOneDelimeterMoreThenOneSymbol_ReturnsumOfSum_Test1()
+        {
+            Assert.AreEqual(Add(1, 2, 3, 1, 2), calculatorAdd.Add("//[**][%][ss]\n1**2%3ss1ss2ss"));
+        }
+
         private int Add(params int[] n)
         {
             int sum = 0;
