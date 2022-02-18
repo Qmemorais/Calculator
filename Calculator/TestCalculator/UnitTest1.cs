@@ -66,6 +66,18 @@ namespace TestCalculator
             Assert.AreEqual(Add(1, 5, 7), calculatorAdd.Add("//;\n1;5;7"));
         }
 
+        [Test]
+        public void AddStringWithNegativesNumber_ReturnException_Test1()
+        {
+            var negativeNumbers = Assert.Throws<NegativeException>(() => calculatorAdd.Add("2,-5,-4")).Value;
+            Assert.AreEqual(new int[] { -5,-4 }, negativeNumbers);
+        }
+
+        [Test]
+        public void AddStringWithBigNumbers_ReturnsumOfSmall_Test1()
+        {
+            Assert.AreEqual(Add(1,2,3,4,5,6,7,8,9), calculatorAdd.Add("1,1050,2,3,4,5,6,7,8,9"));
+        }
 
         private int Add(params int[] n)
         {
