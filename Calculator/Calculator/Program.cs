@@ -16,19 +16,27 @@ namespace ProjectCalculator
 
             do
             {
-                string numbers = Console.ReadLine();
-                if (numbers.Equals("?")) return;
                 try
                 {
-                    var result = calculator.Add(numbers);
-                    Console.WriteLine($"Result is: {result}");
+                    string numbers = Console.ReadLine();
+                    if (numbers.Equals("?")) return;
+                    try
+                    {
+                        var result = calculator.Add(numbers);
+                        Console.WriteLine($"Result is: {result}");
+                    }
+                    catch (NegativeException ex)
+                    {
+                        Console.WriteLine("negatives not allowed" +
+                            $"\n{string.Join(", ", ex.Value)}");
+                    }
+                    Console.WriteLine("You can enter other numbers (enter to exit)");
                 }
-                catch(NegativeException ex)
+                catch(Exception e)
                 {
-                    Console.WriteLine("negatives not allowed" +
-                        $"\n{string.Join(", ",ex.Value)}");
+                    Console.WriteLine(e.Message);
+                    Console.WriteLine("You can enter other numbers (enter to exit)");
                 }
-                Console.WriteLine("You can enter other numbers (enter to exit)");
 
             } while (true);
         }
