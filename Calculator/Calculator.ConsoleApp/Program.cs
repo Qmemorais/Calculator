@@ -20,7 +20,6 @@ namespace Calculator.ConsoleApp
                 try
                 {
                     string numbers = Console.ReadLine();
-                    if (numbers.Equals("?")) return;
                     try
                     {
                         var result = calculator.Add(numbers);
@@ -31,6 +30,7 @@ namespace Calculator.ConsoleApp
                         Console.WriteLine("negatives not allowed" +
                             $"\n{string.Join(", ", ex.Value)}");
                     }
+
                     Console.WriteLine("You can enter other numbers (enter to exit)");
                 }
                 catch (Exception e)

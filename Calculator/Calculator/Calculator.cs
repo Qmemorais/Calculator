@@ -12,7 +12,7 @@ namespace Calculator.ProjectCalculator
             {
                 return 0;
             }
-
+            numbers = numbers.Replace(@"\n", "\n");
             Delimetres(numbers, out List<int> values);
 
             return Sum(values);
@@ -24,10 +24,33 @@ namespace Calculator.ProjectCalculator
 
             if (stringToSplit.Contains("//"))
             {
-                List<string> symbolToSplit = stringToSplit.Split(new string[] { "//", "[", "]", "\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                List<string> symbolToSplit = stringToSplit.Split(new string[] { "//","\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
                 string numbers = symbolToSplit.Last();
                 symbolToSplit.Remove(symbolToSplit.Last());
-                symbolToSplit.Add(",");
+                string valuesToSplit = symbolToSplit.First();
+
+                if (valuesToSplit.Contains('[') && valuesToSplit.Contains(']'))
+                {
+                    string delimeter = "";
+
+                    for (int i = 0; i < valuesToSplit.Length; i++)
+                    {
+                        if (valuesToSplit[i] == '[' && delimeter == "")
+                        {
+                            i++;
+                            do
+                            {
+                                delimeter += valuesToSplit[i];
+                                i++;
+                            } while (i != valuesToSplit.Length - 1
+                            && valuesToSplit.IndexOf('[', i) - valuesToSplit.IndexOf(']', i) != 1
+                            && i != valuesToSplit.IndexOf(']', i));
+                        }
+                        symbolToSplit.Add(delimeter);
+                        delimeter = "";
+                    }
+                }
+
                 valuesString = numbers.Split(symbolToSplit.ToArray(), StringSplitOptions.RemoveEmptyEntries);
             }
             else
