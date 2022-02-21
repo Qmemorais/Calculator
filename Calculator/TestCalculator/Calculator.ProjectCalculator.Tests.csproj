@@ -1,11 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
 
-    <AssemblyName>Calculator.ProjectCalculator.Tests</AssemblyName>
+    <AssemblyName>ProjectCalculator.Tests</AssemblyName>
 
     <ApplicationIcon />
 
@@ -13,7 +13,7 @@
 
     <StartupObject />
 
-    <RootNamespace>Calculator.ProjectCalculator.Tests</RootNamespace>
+    <RootNamespace>ProjectCalculator.Tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Calculator\ProjectCalculator.csproj" />
+    <ProjectReference Include="..\Calculator\Calculator.ProjectCalculator.csproj" />
   </ItemGroup>
 
 </Project>
