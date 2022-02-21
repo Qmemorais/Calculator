@@ -1,15 +1,15 @@
 using NUnit.Framework;
-using ProjectCalculator;
+using Calculator.ProjectCalculator;
 
 namespace TestCalculator
 {
     public class CalculatorTests
     {
-        private Calculator calculator;
+        private Calculator.ProjectCalculator.Calculator calculator;
         [SetUp]
         public void Setup()
         {
-            calculator = new Calculator();
+            calculator = new Calculator.ProjectCalculator.Calculator();
         }
 
         [Test]
