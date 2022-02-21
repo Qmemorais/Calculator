@@ -8,16 +8,18 @@ namespace ProjectCalculator
     {
         public int Add(string numbers)
         {
-            return Sum(Delimetres(numbers, out List<int> values));
+            if (numbers.Length == 0)
+            {
+                return 0;
+            }
+
+            Delimetres(numbers, out List<int> values);
+
+            return Sum(values);
         }
 
         private List<int> Delimetres(string stringToSplit, out List<int> values)
         {
-            if (stringToSplit.Length == 0)
-            {
-                return values = new List<int>();
-            }
-
             string[] valuesString;
 
             if (stringToSplit.Contains("//"))
@@ -26,8 +28,7 @@ namespace ProjectCalculator
                 string numbers = symbolToSplit.Last();
                 symbolToSplit.Remove(symbolToSplit.Last());
                 symbolToSplit.Add(",");
-                valuesString = numbers
-                .Split(symbolToSplit.ToArray(), StringSplitOptions.RemoveEmptyEntries);
+                valuesString = numbers.Split(symbolToSplit.ToArray(), StringSplitOptions.RemoveEmptyEntries);
             }
             else
             {
@@ -41,13 +42,15 @@ namespace ProjectCalculator
 
         private int Sum(List<int> values)
         {
-            int sum = 0;
-            sum = values.Where(x => x > 0 && x < 1000).Sum();
-
             if (values.Any(x => x < 0))
             {
                 throw new NegativeException("negatives not allowed", values);
             }
+
+            int sum = 0;
+            sum = values
+                .Where(x => x > 0 && x < 1000)
+                .Sum();
 
             return sum;
         }

@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <ApplicationIcon />
+    <StartupObject />
+    <AssemblyName>Calculator.ProjectCalculator</AssemblyName>
+    <Win32Resource />
+    <RootNamespace>Calculator.ProjectCalculator</RootNamespace>
+  </PropertyGroup>
+
+</Project>
