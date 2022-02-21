@@ -18,14 +18,12 @@ namespace ProjectCalculator
                 return values = new List<int>();
             }
 
-            List<string> symbolToSplit = new List<string>();
-            string numbers;
             string[] valuesString;
 
             if (stringToSplit.Contains("//"))
             {
-                symbolToSplit = stringToSplit.Split(new string[] { "//", "[", "]", "\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
-                numbers = symbolToSplit.Last();
+                List<string> symbolToSplit = stringToSplit.Split(new string[] { "//", "[", "]", "\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                string numbers = symbolToSplit.Last();
                 symbolToSplit.Remove(symbolToSplit.Last());
                 symbolToSplit.Add(",");
                 valuesString = numbers
