@@ -48,18 +48,33 @@ namespace TestCalculator
         [Test]
         public void AddMethod_AddStringWithUnknownNumbers_ReturnCorrectSum()
         {
-            Assert.AreEqual(Add(1,2,3), calculator.Add("1,2,3"));
+            //
+            int sumToEqual = Add(1, 2, 3);
+            //
+            var result = calculator.Add("1,2,3");
+            //
+            Assert.AreEqual(sumToEqual, result);
         }
 
         [Test]
         public void AddMethod_AddStringWithLinesBetweenNumbers_ReturnCorrectSum()
         {
-            Assert.AreEqual(Add(1,2,3), calculator.Add("1\n2,3"));
+            //
+            int sumToEqual = Add(1, 2, 3);
+            //
+            var result = calculator.Add("1\n2,3");
+            //
+            Assert.AreEqual(sumToEqual, result);
         }
 
         [Test]
         public void AddMethod_AddStringWithDelimiter_ReturnCorrectSum()
         {
+            //
+            int sumToEqual = Add(1, 2, 3);
+            //
+            var result = calculator.Add("//;\n1;2;3");
+            //
             Assert.AreEqual(Add(1, 2,3), calculator.Add("//;\n1;2;3"));
         }
 
