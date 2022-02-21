@@ -75,12 +75,17 @@ namespace TestCalculator
             //
             var result = calculator.Add("//;\n1;2;3");
             //
-            Assert.AreEqual(Add(1, 2,3), calculator.Add("//;\n1;2;3"));
+            Assert.AreEqual(sumToEqual,result);
         }
 
         [Test]
         public void AddMethod_AddStringWithNegativesNumber_ReturnException()
         {
+            //
+
+            //
+
+            //
             var negativeNumbers = Assert.Throws<NegativeException>(() => calculator.Add("2,-5,-4")).Value;
             Assert.AreEqual(new int[] { -5,-4 }, negativeNumbers);
         }
@@ -88,25 +93,45 @@ namespace TestCalculator
         [Test]
         public void AddMethod_AddStringWithBigNumbers_ReturnCorrectSumOfSmall()
         {
-            Assert.AreEqual(Add(2,2,2,2,2), calculator.Add("2,1050,2,2,2,2"));
+            //
+            int sumToEqual = Add(2, 2, 2, 2, 2);
+            //
+            var result = calculator.Add("2,1050,2,2,2,2");
+            //
+            Assert.AreEqual(sumToEqual,result);
         }
 
         [Test]
         public void AddMethod_AddStringDelimeterMoreThenOneSymbol_ReturnCorrectSum()
         {
-            Assert.AreEqual(Add(1,2,2,5), calculator.Add("//[***]\n1***2***2***5"));
+            //
+            int sumToEqual = Add(1, 2, 2, 5);
+            //
+            var result = calculator.Add("//[***]\n1***2***2***5");
+            //
+            Assert.AreEqual(sumToEqual,result);
         }
 
         [Test]
         public void AddMethod_AddStringMoreThenOneDelimeter_ReturnCorrectSum()
         {
-            Assert.AreEqual(Add(1,2,3,1,2), calculator.Add("//[*][%][s]\n1*2%3ss1s2s"));
+            //
+            int sumToEqual = Add(1, 2, 3, 1, 2);
+            //
+            var result = calculator.Add("//[*][%][s]\n1*2%3ss1s2s");
+            //
+            Assert.AreEqual(sumToEqual,result);
         }
 
         [Test]
         public void AddMethod_AddStringMoreThenOneDelimeterMoreThenOneSymbol_ReturnCorrectSum()
         {
-            Assert.AreEqual(Add(1, 2, 3, 1, 2), calculator.Add("//[**][%][ss]\n1**2%3ss1ss2ss"));
+            //
+            int sumToEqual = Add(1, 2, 3, 1, 2);
+            //
+            var result = calculator.Add("//[**][%][ss]\n1**2%3ss1ss2ss");
+            //
+            Assert.AreEqual(sumToEqual,result);
         }
 
         private int Add(params int[] n)
