@@ -1,7 +1,6 @@
 ﻿using System;
-using Calculator.ProjectCalculator;
 
-namespace Calculator.ConsoleApp
+namespace Calculator.ProjectCalculator.ConsoleApp
 {
     class Program
     {
@@ -13,7 +12,7 @@ namespace Calculator.ConsoleApp
 
         public static void Menu()
         {
-            ProjectCalculator.Calculator calculator = new ProjectCalculator.Calculator();
+            Calculator calculator = new Calculator();
 
             do
             {
