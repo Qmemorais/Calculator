@@ -15,24 +15,34 @@ namespace TestCalculator
         [Test]
         public void AddMethod_AddEmptyString_ReturnZero()
         {
-            Assert.AreEqual(Add(), calculator.Add(""));
+            //
+            int sumToEqual = Add();
+            //
+            var result = calculator.Add("");
+            //
+            Assert.AreEqual(sumToEqual, result);
         }
 
         [Test]
         public void AddMethod_AddStringWithOneNumber_ReturnValueOfNumber()
         {
             //
-
+            int sumToEqual = Add(25);
             //
-
+            var result = calculator.Add("25");
             //
-            Assert.AreEqual(Add(25), calculator.Add("25"));
+            Assert.AreEqual(sumToEqual, result);
         }
 
         [Test]
         public void AddMethod_AddStringWithTwoNumbers_ReturnCorrectSum()
         {
-            Assert.AreEqual(Add(5,3), calculator.Add("5,3"));
+            //
+            int sumToEqual = Add(5, 3);
+            //
+            var result = calculator.Add("5,3");
+            //
+            Assert.AreEqual(sumToEqual, result);
         }
 
         [Test]
