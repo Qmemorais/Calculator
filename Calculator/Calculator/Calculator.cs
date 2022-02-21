@@ -29,7 +29,7 @@ namespace Calculator.ProjectCalculator
                 symbolToSplit.Remove(symbolToSplit.Last());
                 string valuesToSplit = symbolToSplit.First();
 
-                if (valuesToSplit.Contains('[') && valuesToSplit.Contains(']'))
+                if (valuesToSplit.Contains('[') && valuesToSplit.Contains(']') && valuesToSplit.Length != 2)
                 {
                     string delimeter = "";
 
@@ -42,7 +42,7 @@ namespace Calculator.ProjectCalculator
                             {
                                 delimeter += valuesToSplit[i];
                                 i++;
-                            } while (i != valuesToSplit.Length - 1
+                            } while (i <= valuesToSplit.Length - 1
                             && valuesToSplit.IndexOf('[', i) - valuesToSplit.IndexOf(']', i) != 1
                             && i != valuesToSplit.IndexOf(']', i));
                         }
