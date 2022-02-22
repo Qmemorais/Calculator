@@ -12,26 +12,16 @@ namespace TestCalculator
             calculator = new Calculator.ProjectCalculator.Calculator();
         }
 
-        [Test]
-        public void AddMethod_AddEmptyString_ReturnZero()
+        [TestCase("", ExpectedResult = 0)]
+        public int Add_AddEmptyString_ReturnZero(string res)
         {
-            //
-            int sumToEqual = Add();
-            //
-            var result = calculator.Add("");
-            //
-            Assert.AreEqual(sumToEqual, result);
+            return calculator.Add(res);
         }
 
-        [Test]
-        public void AddMethod_AddStringWithOneNumber_ReturnValueOfNumber()
+        [TestCase("25", ExpectedResult = 25)]
+        public int Add_AddStringWithOneNumber_ReturnValueOfNumber(string res)
         {
-            //
-            int sumToEqual = Add(25);
-            //
-            var result = calculator.Add("25");
-            //
-            Assert.AreEqual(sumToEqual, result);
+            return calculator.Add(res);
         }
 
         [Test]
