@@ -1,8 +1,11 @@
 
 Calculator/.vs/Calculator/v16/
+Calculator/.vs/Calculator/DesignTimeBuild/
 Calculator/Calculator/bin/
 Calculator/Calculator/obj/
 Calculator/Calculator.ConsoleApp/bin/
 Calculator/Calculator.ConsoleApp/obj/
+Calculator/Calculator.ConsoleApp.Tests/bin/
+Calculator/Calculator.ConsoleApp.Tests/obj/
 Calculator/TestCalculator/bin/
 Calculator/TestCalculator/obj/

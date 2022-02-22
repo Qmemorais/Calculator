@@ -1,4 +1,4 @@
-﻿namespace Calculator.CalculatorLogic.ConsoleApp
+﻿namespace Calculator.ConsoleApp
 {
     class Program
     {

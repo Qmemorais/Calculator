@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Calculator.CalculatorLogic.ConsoleApp
+namespace Calculator.ConsoleApp
 {
-    class WriteInformation
+    public class WriteInformation
     {
         public void Write(string toWrite)
         {

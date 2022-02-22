@@ -1,9 +1,10 @@
-﻿namespace Calculator.CalculatorLogic.ConsoleApp
+﻿using Calculator.CalculatorLogic;
+namespace Calculator.ConsoleApp
 {
-    class Menu
+    public class Menu
     {
         private string numbers;
-        readonly Calculator calculator = new Calculator();
+        readonly CalculatorLogic.Calculator calculator = new CalculatorLogic.Calculator();
         readonly WriteInformation writeRead = new WriteInformation();
         public void Add()
         {
