@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Calculator.CalculatorLogic
 {
-    public class Calculator
+    public class Calculator:ICalculator
     {
         public int Add(string numbers)
         {
