@@ -1,38 +1,27 @@
-﻿using System;
-
-namespace Calculator.ProjectCalculator.ConsoleApp
+﻿namespace Calculator.ProjectCalculator.ConsoleApp
 {
     class Menu
     {
+        private string numbers;
         readonly Calculator calculator = new Calculator();
+        WriteInformation writeRead = new WriteInformation();
         public void Add()
         {
-            Console.WriteLine("Enter comma separated numbers (enter to exit):");
+            writeRead.Write("Enter comma separated numbers (enter to exit):");
             do
             {
+                numbers = writeRead.Read();
                 try
                 {
-                    string numbers = Console.ReadLine();
-                    try
-                    {
-                        var result = calculator.Add(numbers);
-                        Console.WriteLine($"Result is: {result}");
-                    }
-                    catch (NegativeException ex)
-                    {
-                        Console.WriteLine("negatives not allowed" +
-                            $"\n{string.Join(", ", ex.Value)}");
-                    }
-
+                    var result = calculator.Add(numbers);
+                    writeRead.Write($"Result is: {result}");
                 }
-                catch (Exception e)
+                catch (NegativeException ex)
                 {
-                    Console.WriteLine(e.Message);
+                    writeRead.Write("negatives not allowed" +
+                        $"\n{string.Join(", ", ex.Value)}");
                 }
-                finally
-                {
-                    Console.WriteLine("You can enter other numbers (enter to exit)");
-                }
+                writeRead.Write("You can enter other numbers (enter to exit)");
             } while (true);
         }
     }
