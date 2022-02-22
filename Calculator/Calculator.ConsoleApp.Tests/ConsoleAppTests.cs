@@ -152,6 +152,54 @@ namespace Calculator.ConsoleApp.Tests
             writeRead.Verify(x => x.Write(writeLineNextInput), Times.Once);
         }
 
+        [Test]
+        public void MenuAdd_InputDelimeterMoreThenOneSymbol_ReturnCorrectSum()
+        {
+            //
+            var readLine = "//[***]\n1***2***2***5";
+            var writeLineRes = "Result is: " + Add(1, 2, 2, 5);
+            writeRead.Setup(x => x.Read()).Returns(readLine);
+            calculator.Setup(x => x.Add(readLine)).Returns(Add(1, 2, 2, 5));
+            menu = new Menu(writeRead.Object, calculator.Object);
+            //
+            menu.Add();
+            //
+            writeRead.Verify(x => x.Write(writeLineRes), Times.Once);
+            writeRead.Verify(x => x.Write(writeLineNextInput), Times.Once);
+        }
+
+        [Test]
+        public void MenuAdd_InputMoreThenOneDelimeter_ReturnCorrectSum()
+        {
+            //
+            var readLine = "//[*][%][s]\n1*2%3ss1s2s";
+            var writeLineRes = "Result is: " + Add(1, 2, 3, 1, 2);
+            writeRead.Setup(x => x.Read()).Returns(readLine);
+            calculator.Setup(x => x.Add(readLine)).Returns(Add(1, 2, 3, 1, 2));
+            menu = new Menu(writeRead.Object, calculator.Object);
+            //
+            menu.Add();
+            //
+            writeRead.Verify(x => x.Write(writeLineRes), Times.Once);
+            writeRead.Verify(x => x.Write(writeLineNextInput), Times.Once);
+        }
+
+        [Test]
+        public void MenuAdd_InputMoreThenOneDelimeterMoreThenOneSymbol_ReturnCorrectSum()
+        {
+            //
+            var readLine = "//[**][%][ss]\n1**2%3ss1ss2ss";
+            var writeLineRes = "Result is: " + Add(1, 2, 3, 1, 2);
+            writeRead.Setup(x => x.Read()).Returns(readLine);
+            calculator.Setup(x => x.Add(readLine)).Returns(Add(1, 2, 3, 1, 2));
+            menu = new Menu(writeRead.Object, calculator.Object);
+            //
+            menu.Add();
+            //
+            writeRead.Verify(x => x.Write(writeLineRes), Times.Once);
+            writeRead.Verify(x => x.Write(writeLineNextInput), Times.Once);
+        }
+
         private int Add(params int[] n)
         {
             int sum = 0;
