@@ -1,10 +1,10 @@
-﻿namespace Calculator.ProjectCalculator.ConsoleApp
+﻿namespace Calculator.CalculatorLogic.ConsoleApp
 {
     class Menu
     {
         private string numbers;
         readonly Calculator calculator = new Calculator();
-        WriteInformation writeRead = new WriteInformation();
+        readonly WriteInformation writeRead = new WriteInformation();
         public void Add()
         {
             writeRead.Write("Enter comma separated numbers (enter to exit):");

@@ -5,9 +5,9 @@
     <TargetFramework>net5.0</TargetFramework>
     <ApplicationIcon />
     <StartupObject />
-    <AssemblyName>Calculator.ProjectCalculator</AssemblyName>
+    <AssemblyName>Calculator.CalculatorLogic</AssemblyName>
     <Win32Resource />
-    <RootNamespace>Calculator.ProjectCalculator</RootNamespace>
+    <RootNamespace>Calculator.CalculatorLogic</RootNamespace>
   </PropertyGroup>
 
 </Project>

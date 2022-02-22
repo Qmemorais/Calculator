@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Calculator.ProjectCalculator.ConsoleApp
+namespace Calculator.CalculatorLogic.ConsoleApp
 {
     class WriteInformation
     {

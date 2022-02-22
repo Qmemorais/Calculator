@@ -5,7 +5,7 @@
 
     <IsPackable>false</IsPackable>
 
-    <AssemblyName>ProjectCalculator.Tests</AssemblyName>
+    <AssemblyName>Calculator.CalculatorLogic.Tests</AssemblyName>
 
     <ApplicationIcon />
 
@@ -13,7 +13,7 @@
 
     <StartupObject />
 
-    <RootNamespace>ProjectCalculator.Tests</RootNamespace>
+    <RootNamespace>Calculator.CalculatorLogic.Tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Calculator\Calculator.ProjectCalculator.csproj" />
+    <ProjectReference Include="..\Calculator\Calculator.CalculatorLogic.csproj" />
   </ItemGroup>
 
 </Project>

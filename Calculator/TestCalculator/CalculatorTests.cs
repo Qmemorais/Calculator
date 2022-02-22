@@ -1,15 +1,14 @@
 using NUnit.Framework;
-using Calculator.ProjectCalculator;
 
-namespace TestCalculator
+namespace Calculator.CalculatorLogic.Tests
 {
     public class CalculatorTests
     {
-        private Calculator.ProjectCalculator.Calculator calculator;
+        private Calculator calculator;
         [SetUp]
         public void Setup()
         {
-            calculator = new Calculator.ProjectCalculator.Calculator();
+            calculator = new Calculator();
         }
 
         [TestCase("", ExpectedResult = 0)]

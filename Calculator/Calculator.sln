@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32126.315
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator.ProjectCalculator", "Calculator\Calculator.ProjectCalculator.csproj", "{F1679873-0EDB-46EC-8DC5-8B84A43B1BA8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator.CalculatorLogic", "Calculator\Calculator.CalculatorLogic.csproj", "{F1679873-0EDB-46EC-8DC5-8B84A43B1BA8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator.ProjectCalculator.Tests", "TestCalculator\Calculator.ProjectCalculator.Tests.csproj", "{87BC4A71-32DD-4243-B461-DC8FAD14F2F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator.CalculatorLogic.Tests", "TestCalculator\Calculator.CalculatorLogic.Tests.csproj", "{87BC4A71-32DD-4243-B461-DC8FAD14F2F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator.ProjectCalculator.ConsoleApp", "Calculator.ConsoleApp\Calculator.ProjectCalculator.ConsoleApp.csproj", "{FF673275-338B-47A7-ABEB-714C31F2A033}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calculator.CalculatorLogic.ConsoleApp", "Calculator.ConsoleApp\Calculator.CalculatorLogic.ConsoleApp.csproj", "{FF673275-338B-47A7-ABEB-714C31F2A033}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

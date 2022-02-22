@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Calculator.ProjectCalculator
+namespace Calculator.CalculatorLogic
 {
     public class Calculator
     {
