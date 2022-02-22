@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Calculator.ProjectCalculator.ConsoleApp
+﻿namespace Calculator.ProjectCalculator.ConsoleApp
 {
     class Program
     {
