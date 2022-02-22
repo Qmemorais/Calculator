@@ -12,53 +12,29 @@ namespace Calculator.ProjectCalculator
             {
                 return 0;
             }
-            numbers = numbers.Replace(@"\n", "\n");
-            Delimetres(numbers, out List<int> values);
+
+            List<int> values = Delimetres(numbers);
 
             return Sum(values);
         }
 
-        private List<int> Delimetres(string stringToSplit, out List<int> values)
+        private List<int> Delimetres(string stringToSplit)
         {
             string[] valuesString;
 
             if (stringToSplit.Contains("//"))
             {
-                List<string> symbolToSplit = stringToSplit.Split(new string[] { "//","\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
-                string numbers = symbolToSplit.Last();
-                symbolToSplit.Remove(symbolToSplit.Last());
-                string valuesToSplit = symbolToSplit.First();
-
-                if (valuesToSplit.Contains('[') && valuesToSplit.Contains(']') && valuesToSplit.Length != 2)
-                {
-                    string delimeter = "";
-
-                    for (int i = 0; i < valuesToSplit.Length; i++)
-                    {
-                        if (valuesToSplit[i] == '[' && delimeter == "")
-                        {
-                            i++;
-                            do
-                            {
-                                delimeter += valuesToSplit[i];
-                                i++;
-                            } while (i <= valuesToSplit.Length - 1
-                            && valuesToSplit.IndexOf('[', i) - valuesToSplit.IndexOf(']', i) != 1
-                            && i != valuesToSplit.IndexOf(']', i));
-                        }
-                        symbolToSplit.Add(delimeter);
-                        delimeter = "";
-                    }
-                }
-
-                valuesString = numbers.Split(symbolToSplit.ToArray(), StringSplitOptions.RemoveEmptyEntries);
+                string numbers = stringToSplit.Split(new string[] { "]\n", @"]\n", "\n", @"\n"}, StringSplitOptions.RemoveEmptyEntries).ToList().Last();
+                string valuesToSplit = stringToSplit.Split(new string[] { "]\n", @"]\n", "\n", @"\n" }, StringSplitOptions.RemoveEmptyEntries).ToList().First();
+                var symbolToSplit = valuesToSplit.Split(new string[] { "//[", "//", "][" }, StringSplitOptions.RemoveEmptyEntries);
+                valuesString = numbers.Split(symbolToSplit, StringSplitOptions.RemoveEmptyEntries);
             }
             else
             {
-                valuesString = stringToSplit.Split(new string[] { "\n", "," }, StringSplitOptions.RemoveEmptyEntries);
+                valuesString = stringToSplit.Split(new string[] { @"\n", "\n", "," }, StringSplitOptions.RemoveEmptyEntries);
             }
 
-            values = valuesString.Select(x => int.Parse(x)).ToList();
+            var values = valuesString.Select(x => int.Parse(x)).ToList();
 
             return values;
         }
@@ -70,8 +46,7 @@ namespace Calculator.ProjectCalculator
                 throw new NegativeException("negatives not allowed", values);
             }
 
-            int sum = 0;
-            sum = values
+            int sum = values
                 .Where(x => x > 0 && x < 1000)
                 .Sum();
 
