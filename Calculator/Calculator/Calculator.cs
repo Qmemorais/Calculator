@@ -6,6 +6,8 @@ namespace Calculator.ProjectCalculator
 {
     public class Calculator
     {
+        private List<int> values = new List<int>();
+
         public int Add(string numbers)
         {
             if (numbers.Length == 0)
@@ -13,33 +15,43 @@ namespace Calculator.ProjectCalculator
                 return 0;
             }
 
-            List<int> values = Delimetres(numbers);
+            Delimetres(numbers);
 
-            return Sum(values);
+            return Sum();
         }
 
-        private List<int> Delimetres(string stringToSplit)
+        private void Delimetres(string stringToSplit)
         {
             string[] valuesString;
 
+            var splitBySymbolsToFindNumbersAndDelimeter = new string[] { "]\n", @"]\n", "\n", @"\n", "," };
+            var splitDelimetersBuySimbols = new string[] { "//[", "//", "][" };
+
             if (stringToSplit.Contains("//"))
             {
-                string numbers = stringToSplit.Split(new string[] { "]\n", @"]\n", "\n", @"\n"}, StringSplitOptions.RemoveEmptyEntries).ToList().Last();
-                string valuesToSplit = stringToSplit.Split(new string[] { "]\n", @"]\n", "\n", @"\n" }, StringSplitOptions.RemoveEmptyEntries).ToList().First();
-                var symbolToSplit = valuesToSplit.Split(new string[] { "//[", "//", "][" }, StringSplitOptions.RemoveEmptyEntries);
-                valuesString = numbers.Split(symbolToSplit, StringSplitOptions.RemoveEmptyEntries);
+                string numbers = stringToSplit
+                    .Split(splitBySymbolsToFindNumbersAndDelimeter, StringSplitOptions.RemoveEmptyEntries)
+                    .ToList().Last();
+                string valuesToSplit = stringToSplit
+                    .Split(splitBySymbolsToFindNumbersAndDelimeter, StringSplitOptions.RemoveEmptyEntries)
+                    .ToList().First();
+                var symbolToSplit = valuesToSplit
+                    .Split(splitDelimetersBuySimbols, StringSplitOptions.RemoveEmptyEntries);
+                valuesString = numbers
+                    .Split(symbolToSplit, StringSplitOptions.RemoveEmptyEntries);
             }
             else
             {
-                valuesString = stringToSplit.Split(new string[] { @"\n", "\n", "," }, StringSplitOptions.RemoveEmptyEntries);
+                valuesString = stringToSplit
+                    .Split(splitBySymbolsToFindNumbersAndDelimeter, StringSplitOptions.RemoveEmptyEntries);
             }
 
-            var values = valuesString.Select(x => int.Parse(x)).ToList();
-
-            return values;
+            values = valuesString
+                .Select(x => int.Parse(x))
+                .ToList();
         }
 
-        private int Sum(List<int> values)
+        private int Sum()
         {
             if (values.Any(x => x < 0))
             {
@@ -47,7 +59,7 @@ namespace Calculator.ProjectCalculator
             }
 
             int sum = values
-                .Where(x => x > 0 && x < 1000)
+                .Where(x => x < 1000)
                 .Sum();
 
             return sum;
