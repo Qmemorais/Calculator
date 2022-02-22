@@ -19,6 +19,15 @@ namespace Calculator.ConsoleApp
             calculator = new CalculatorLogic.Calculator();
         }
 
+        public void Info()
+        {
+            do
+            {
+                Add();
+            }
+            while (true);
+        }
+
         public void Add()
         {
             numbers = writeRead.Read();

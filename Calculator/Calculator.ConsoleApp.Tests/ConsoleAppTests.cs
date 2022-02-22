@@ -20,7 +20,7 @@ namespace Calculator.ConsoleApp.Tests
             calculator.Setup(x => x.Add(readLine)).Returns(0);
             menu = new Menu(writeRead.Object, calculator.Object);
             //
-            menu.Add();
+            menu.CallCalculator();
             //
             writeRead.Verify(x => x.Write(writeLineRes), Times.Once);
             writeRead.Verify(x => x.Write(writeLineNextInput), Times.Once);
