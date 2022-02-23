@@ -1,4 +1,6 @@
 using NUnit.Framework;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Calculator.CalculatorLogic.Tests
 {
@@ -26,55 +28,55 @@ namespace Calculator.CalculatorLogic.Tests
         [Test]
         public void AddMethod_AddStringWithTwoNumbers_ReturnCorrectSum()
         {
-            //
-            int sumToEqual = Add(5, 3);
-            //
+            //arrange
+            var testValues = new List<int> { 5, 3 } ;
+            var expectedRes = testValues.Sum();
+            //act
             var result = calculator.Add("5,3");
-            //
-            Assert.AreEqual(sumToEqual, result);
+            //assert
+            Assert.AreEqual(expectedRes, result);
         }
 
         [Test]
         public void AddMethod_AddStringWithUnknownNumbers_ReturnCorrectSum()
         {
-            //
-            int sumToEqual = Add(1, 2, 3);
-            //
+            //arrange
+            var testValues = new List<int> { 1, 2, 3 };
+            var expectedRes = testValues.Sum();
+            //act
             var result = calculator.Add("1,2,3");
-            //
-            Assert.AreEqual(sumToEqual, result);
+            //assert
+            Assert.AreEqual(expectedRes, result);
         }
 
         [Test]
         public void AddMethod_AddStringWithLinesBetweenNumbers_ReturnCorrectSum()
         {
-            //
-            int sumToEqual = Add(1, 2, 3);
-            //
+            //arrange
+            var testValues = new List<int> { 1, 2, 3 };
+            var expectedRes = testValues.Sum();
+            //act
             var result = calculator.Add("1\n2,3");
-            //
-            Assert.AreEqual(sumToEqual, result);
+            //assert
+            Assert.AreEqual(expectedRes, result);
         }
 
         [Test]
         public void AddMethod_AddStringWithDelimiter_ReturnCorrectSum()
         {
-            //
-            int sumToEqual = Add(1, 2, 3);
-            //
+            //arrange
+            var testValues = new List<int> { 1, 2, 3 };
+            var expectedRes = testValues.Sum();
+            //act
             var result = calculator.Add("//;\n1;2;3");
-            //
-            Assert.AreEqual(sumToEqual,result);
+            //assert
+            Assert.AreEqual(expectedRes,result);
         }
 
         [Test]
         public void AddMethod_AddStringWithNegativesNumber_ReturnException()
         {
-            //
-
-            //
-
-            //
+            //assert
             var negativeNumbers = Assert.Throws<NegativeException>(() => calculator.Add("2,-5,-4")).Value;
             Assert.AreEqual(new int[] { -5,-4 }, negativeNumbers);
         }
@@ -82,55 +84,49 @@ namespace Calculator.CalculatorLogic.Tests
         [Test]
         public void AddMethod_AddStringWithBigNumbers_ReturnCorrectSumOfSmall()
         {
-            //
-            int sumToEqual = Add(2, 2, 2, 2, 2);
-            //
+            //arrange
+            var testValues = new List<int> { 2, 2, 2, 2, 2 };
+            var expectedRes = testValues.Sum();
+            //act
             var result = calculator.Add("2,1050,2,2,2,2");
-            //
-            Assert.AreEqual(sumToEqual,result);
+            //assert
+            Assert.AreEqual(expectedRes,result);
         }
 
         [Test]
         public void AddMethod_AddStringDelimeterMoreThenOneSymbol_ReturnCorrectSum()
         {
-            //
-            int sumToEqual = Add(1, 2, 2, 5);
-            //
+            //arrange
+            var testValues = new List<int> { 1, 2, 2, 5 };
+            var expectedRes = testValues.Sum();
+            //act
             var result = calculator.Add("//[***]\n1***2***2***5");
-            //
-            Assert.AreEqual(sumToEqual,result);
+            //assert
+            Assert.AreEqual(expectedRes,result);
         }
 
         [Test]
         public void AddMethod_AddStringMoreThenOneDelimeter_ReturnCorrectSum()
         {
-            //
-            int sumToEqual = Add(1, 2, 3, 1, 2);
-            //
+            //arrange
+            var testValues = new List<int> { 1, 2, 3, 1, 2 };
+            var expectedRes = testValues.Sum();
+            //act
             var result = calculator.Add("//[*][%][s]\n1*2%3ss1s2s");
-            //
-            Assert.AreEqual(sumToEqual,result);
+            //assert
+            Assert.AreEqual(expectedRes,result);
         }
 
         [Test]
         public void AddMethod_AddStringMoreThenOneDelimeterMoreThenOneSymbol_ReturnCorrectSum()
         {
-            //
-            int sumToEqual = Add(1, 2, 3, 1, 2);
-            //
+            //arrange
+            var testValues = new List<int> { 1, 2, 3, 1, 2 };
+            var expectedRes = testValues.Sum();
+            //act
             var result = calculator.Add("//[**][%][ss]\n1**2%3ss1ss2ss");
-            //
-            Assert.AreEqual(sumToEqual,result);
-        }
-
-        private int Add(params int[] n)
-        {
-            int sum = 0;
-            foreach (int i in n)
-            {
-                sum += i;
-            }
-            return sum;
+            //assert
+            Assert.AreEqual(expectedRes,result);
         }
     }
 }
