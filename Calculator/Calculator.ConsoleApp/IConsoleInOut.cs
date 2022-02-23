@@ -1,6 +1,6 @@
 ﻿namespace Calculator.ConsoleApp
 {
-    public interface IWriteRead
+    public interface IConsoleInOut
     {
         public void Write(string toWrite);
         public string Read();
