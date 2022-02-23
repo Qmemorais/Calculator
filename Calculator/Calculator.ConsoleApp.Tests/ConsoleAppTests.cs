@@ -2,213 +2,259 @@
 using Moq;
 using Calculator.CalculatorLogic;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Calculator.ConsoleApp.Tests
 {
     public class ConsoleAppTests
     {
-        Menu menu;
-        Mock<IWriteRead> writeRead;
-        Mock<CalculatorLogic.ICalculator> calculator;
-        private readonly string writeLineNextInput = "You can enter other numbers (enter to exit)";
+        private Mock<IConsoleInOut> _consoleInOut;
+        private Mock<CalculatorLogic.Calculator> _calculator;
+        private readonly string _writeLineNextInput = "You can enter other numbers (enter to exit)";
+        private ConsoleInterface _consoleInterface;
 
         [SetUp]
         public void Setup()
         {
-            writeRead = new Mock<IWriteRead>();
-            calculator = new Mock<CalculatorLogic.ICalculator>();
+            _consoleInOut = new Mock<IConsoleInOut>();
+            _calculator = new Mock<CalculatorLogic.Calculator>();
+            _consoleInterface = new ConsoleInterface(_consoleInOut.Object, _calculator.Object);
         }
 
-        [Test]
+        [TestCase()]
         public void MenuAdd_InputEmptyString_ReturnZero()
         {
-            //
+            //arrange
             var readLine = "";
-            var writeLineRes = "Result is: " + Add(0);
-            writeRead.Setup(x => x.Read()).Returns(readLine);
-            calculator.Setup(x => x.Add(readLine)).Returns(0);
-            menu = new Menu(writeRead.Object, calculator.Object);
-            //
-            menu.Add();
-            //
-            writeRead.Verify(x => x.Write(writeLineRes), Times.Once);
-            writeRead.Verify(x => x.Write(writeLineNextInput), Times.Once);
+            var writeLineRes = "Result is: 0";
+
+            _consoleInOut
+                .Setup(x => x.Read())
+                .Returns(readLine);
+            _calculator
+                .Setup(x=>x.Add(readLine))
+                .Returns(0);
+            //act
+            _consoleInterface.CallCalculatorMethodAdd();
+            //assert
+            _consoleInOut.Verify(x => x.Write(writeLineRes), Times.Once);
+            _consoleInOut.Verify(x => x.Write(_writeLineNextInput), Times.Once);
         }
 
         [Test]
         public void MenuAdd_InputCorrectOneValue_ReturnCorrectValue()
         {
-            //
+            //arrange
             var readLine = "25";
-            var writeLineRes = "Result is: " + Add(25);
-            writeRead.Setup(x => x.Read()).Returns(readLine);
-            calculator.Setup(x => x.Add(readLine)).Returns(25);
-            menu = new Menu(writeRead.Object, calculator.Object);
-            //
-            menu.Add();
-            //
-            writeRead.Verify(x => x.Write(writeLineRes), Times.Once);
-            writeRead.Verify(x => x.Write(writeLineNextInput), Times.Once);
+            var writeLineRes = "Result is: 25";
+
+            _consoleInOut
+                .Setup(x => x.Read())
+                .Returns(readLine);
+            _calculator
+                .Setup(x => x.Add(readLine))
+                .Returns(25);
+            //act
+            _consoleInterface.CallCalculatorMethodAdd();
+            //assert
+            _consoleInOut.Verify(x => x.Write(writeLineRes), Times.Once);
+            _consoleInOut.Verify(x => x.Write(_writeLineNextInput), Times.Once);
         }
 
         [Test]
         public void MenuAdd_InputCorrectTwoValues_ReturnCorrectSum()
         {
-            //
+            //arrange
+            var testValues = new List<int> { 5, 3 };
+            var expectedRes = testValues.Sum();
             var readLine = "5,3";
-            var writeLineRes = "Result is: " + Add(5, 3);
-            writeRead.Setup(x => x.Read()).Returns(readLine);
-            calculator.Setup(x => x.Add(readLine)).Returns(Add(5, 3));
-            menu = new Menu(writeRead.Object, calculator.Object);
-            //
-            menu.Add();
-            //
-            writeRead.Verify(x => x.Write(writeLineRes), Times.Once);
-            writeRead.Verify(x => x.Write(writeLineNextInput), Times.Once);
+            var writeLineRes = $"Result is: {expectedRes}";
+
+            _consoleInOut
+                .Setup(x => x.Read())
+                .Returns(readLine);
+            _calculator
+                .Setup(x => x.Add(readLine))
+                .Returns(expectedRes);
+            //act
+            _consoleInterface.CallCalculatorMethodAdd();
+            //assert
+            _consoleInOut.Verify(x => x.Write(writeLineRes), Times.Once);
+            _consoleInOut.Verify(x => x.Write(_writeLineNextInput), Times.Once);
         }
 
         [Test]
         public void MenuAdd_InputUnknownValueOfNumbers_ReturnCorrectSum()
         {
-            //
+            //arrange
+            var testValues = new List<int> { 1, 2, 3 };
+            var expectedRes = testValues.Sum();
             var readLine = "1,2,3";
-            var writeLineRes = "Result is: " + Add(1, 2, 3);
-            writeRead.Setup(x => x.Read()).Returns(readLine);
-            calculator.Setup(x => x.Add(readLine)).Returns(Add(1, 2, 3));
-            menu = new Menu(writeRead.Object, calculator.Object);
-            //
-            menu.Add();
-            //
-            writeRead.Verify(x => x.Write(writeLineRes), Times.Once);
-            writeRead.Verify(x => x.Write(writeLineNextInput), Times.Once);
+            var writeLineRes = $"Result is: {expectedRes}";
+
+            _consoleInOut
+                .Setup(x => x.Read())
+                .Returns(readLine);
+            _calculator
+               .Setup(x => x.Add(readLine))
+               .Returns(expectedRes);
+            //act
+            _consoleInterface.CallCalculatorMethodAdd();
+            //assert
+            _consoleInOut.Verify(x => x.Write(writeLineRes), Times.Once);
+            _consoleInOut.Verify(x => x.Write(_writeLineNextInput), Times.Once);
         }
 
         [Test]
         public void MenuAdd_InputValuesAndSlash_ReturnCorrectSum()
         {
-            //
+            //arrange
+            var testValues = new List<int> { 1, 2, 3 };
+            var expectedRes = testValues.Sum();
             var readLine = "1\n2,3";
-            var writeLineRes = "Result is: " + Add(1, 2, 3);
-            writeRead.Setup(x => x.Read()).Returns(readLine);
-            calculator.Setup(x => x.Add(readLine)).Returns(Add(1, 2, 3));
-            menu = new Menu(writeRead.Object, calculator.Object);
-            //
-            menu.Add();
-            //
-            writeRead.Verify(x => x.Write(writeLineRes), Times.Once);
-            writeRead.Verify(x => x.Write(writeLineNextInput), Times.Once);
+            var writeLineRes = $"Result is: {expectedRes}";
+
+            _consoleInOut
+                .Setup(x => x.Read())
+                .Returns(readLine);
+            _calculator
+              .Setup(x => x.Add(readLine))
+              .Returns(expectedRes);
+            //act
+            _consoleInterface.CallCalculatorMethodAdd();
+            //assert
+            _consoleInOut.Verify(x => x.Write(writeLineRes), Times.Once);
+            _consoleInOut.Verify(x => x.Write(_writeLineNextInput), Times.Once);
         }
 
         [Test]
         public void MenuAdd_InputOneDelimeter_ReturnCorrectSum()
         {
-            //
+            //arrange
+            var testValues = new List<int> { 1, 2, 3 };
+            var expectedRes = testValues.Sum();
             var readLine = "//;\n1;2;3";
-            var writeLineRes = "Result is: " + Add(1, 2, 3);
-            writeRead.Setup(x => x.Read()).Returns(readLine);
-            calculator.Setup(x => x.Add(readLine)).Returns(Add(1, 2, 3));
-            menu = new Menu(writeRead.Object, calculator.Object);
-            //
-            menu.Add();
-            //
-            writeRead.Verify(x => x.Write(writeLineRes), Times.Once);
-            writeRead.Verify(x => x.Write(writeLineNextInput), Times.Once);
+            var writeLineRes = $"Result is: {expectedRes}";
+
+            _consoleInOut
+                .Setup(x => x.Read())
+                .Returns(readLine);
+            _calculator
+              .Setup(x => x.Add(readLine))
+              .Returns(expectedRes);
+            //act
+            _consoleInterface.CallCalculatorMethodAdd();
+            //assert
+            _consoleInOut.Verify(x => x.Write(writeLineRes), Times.Once);
+            _consoleInOut.Verify(x => x.Write(_writeLineNextInput), Times.Once);
         }
 
         [Test]
-        public void MenuAdd_InputNegativeValue_ReturnException()
+        public void MenuAdd_InputNegativeValue_ReturnExceptionMessageAndValues()
         {
-            //
+            //arrange
             var readLine = "2,-5,-4";
-            var writeLineRes = "Result is: " + Add(2);
-            var exception = new NegativeException("negatives not allowed" +
-                    $"\n{string.Join(", ", new List<int>() { -5, -4 })}", new List<int>() { -5, -4 });
-            writeRead.Setup(x => x.Read()).Returns(readLine);
-            calculator.Setup(x => x.Add(readLine))
-                .Throws(new NegativeException("", new List<int>() { -5, -4 }));
-            menu = new Menu(writeRead.Object, calculator.Object);
-            //
-            menu.Add();
-            //
-            writeRead.Verify(x => x.Write(writeLineNextInput), Times.Once);
-            writeRead.Verify(x => x.Write(exception.Message), Times.Once);
-            writeRead.Verify(x => x.Write(writeLineRes), Times.Never);
+            var exception = new NegativeException($"negatives not allowed \n{string.Join(", ", new List<int> { -5, -4 })}", new List<int>() { -5, -4 });
 
+            _consoleInOut
+                .Setup(x => x.Read())
+                .Returns(readLine);
+            _calculator
+             .Setup(x => x.Add(readLine))
+             .Throws(new NegativeException("", new List<int>() { -5, -4 }));
+            //act
+            _consoleInterface.CallCalculatorMethodAdd();
+            //assert
+            _consoleInOut.Verify(x => x.Write(_writeLineNextInput), Times.Once);
+            _consoleInOut.Verify(x => x.Write(exception.Message), Times.Once);
         }
 
         [Test]
         public void MenuAdd_InputValuesMoreThenThousand_ReturnCorrectSum()
         {
-            //
+            //arrange
+            var testValues = new List<int> { 2, 2, 2, 2, 2 };
+            var expectedRes = testValues.Sum();
             var readLine = "2,1050,2,2,2,2";
-            var writeLineRes = "Result is: " + Add(2, 2, 2, 2, 2);
-            writeRead.Setup(x => x.Read()).Returns(readLine);
-            calculator.Setup(x => x.Add(readLine)).Returns(Add(2, 2, 2, 2, 2));
-            menu = new Menu(writeRead.Object, calculator.Object);
-            //
-            menu.Add();
-            //
-            writeRead.Verify(x => x.Write(writeLineRes), Times.Once);
-            writeRead.Verify(x => x.Write(writeLineNextInput), Times.Once);
+            var writeLineRes = $"Result is: {expectedRes}";
+
+            _consoleInOut
+                .Setup(x => x.Read())
+                .Returns(readLine);
+            _calculator
+              .Setup(x => x.Add(readLine))
+              .Returns(expectedRes);
+            //act
+            _consoleInterface.CallCalculatorMethodAdd();
+            //assert
+            _consoleInOut.Verify(x => x.Write(writeLineRes), Times.Once);
+            _consoleInOut.Verify(x => x.Write(_writeLineNextInput), Times.Once);
         }
 
         [Test]
         public void MenuAdd_InputDelimeterMoreThenOneSymbol_ReturnCorrectSum()
         {
-            //
+            //arrange
+            var testValues = new List<int> { 1, 2, 2, 5 };
+            var expectedRes = testValues.Sum();
             var readLine = "//[***]\n1***2***2***5";
-            var writeLineRes = "Result is: " + Add(1, 2, 2, 5);
-            writeRead.Setup(x => x.Read()).Returns(readLine);
-            calculator.Setup(x => x.Add(readLine)).Returns(Add(1, 2, 2, 5));
-            menu = new Menu(writeRead.Object, calculator.Object);
-            //
-            menu.Add();
-            //
-            writeRead.Verify(x => x.Write(writeLineRes), Times.Once);
-            writeRead.Verify(x => x.Write(writeLineNextInput), Times.Once);
+            var writeLineRes = $"Result is: {expectedRes}";
+
+            _consoleInOut
+                .Setup(x => x.Read())
+                .Returns(readLine);
+            _calculator
+              .Setup(x => x.Add(readLine))
+              .Returns(expectedRes);
+            //act
+            _consoleInterface.CallCalculatorMethodAdd();
+            //assert
+            _consoleInOut.Verify(x => x.Write(writeLineRes), Times.Once);
+            _consoleInOut.Verify(x => x.Write(_writeLineNextInput), Times.Once);
         }
 
         [Test]
         public void MenuAdd_InputMoreThenOneDelimeter_ReturnCorrectSum()
         {
-            //
+            //arrange
+            var testValues = new List<int> { 1, 2, 3, 1, 2 };
+            var expectedRes = testValues.Sum();
             var readLine = "//[*][%][s]\n1*2%3ss1s2s";
-            var writeLineRes = "Result is: " + Add(1, 2, 3, 1, 2);
-            writeRead.Setup(x => x.Read()).Returns(readLine);
-            calculator.Setup(x => x.Add(readLine)).Returns(Add(1, 2, 3, 1, 2));
-            menu = new Menu(writeRead.Object, calculator.Object);
-            //
-            menu.Add();
-            //
-            writeRead.Verify(x => x.Write(writeLineRes), Times.Once);
-            writeRead.Verify(x => x.Write(writeLineNextInput), Times.Once);
+            var writeLineRes = $"Result is: {expectedRes}";
+
+            _consoleInOut
+                .Setup(x => x.Read())
+                .Returns(readLine);
+            _calculator
+              .Setup(x => x.Add(readLine))
+              .Returns(expectedRes);
+            //act
+            _consoleInterface.CallCalculatorMethodAdd();
+            //assert
+            _consoleInOut.Verify(x => x.Write(writeLineRes), Times.Once);
+            _consoleInOut.Verify(x => x.Write(_writeLineNextInput), Times.Once);
         }
 
         [Test]
         public void MenuAdd_InputMoreThenOneDelimeterMoreThenOneSymbol_ReturnCorrectSum()
         {
-            //
+            //arrange
+            var testValues = new List<int> { 1, 2, 3, 1, 2 };
+            var expectedRes = testValues.Sum();
             var readLine = "//[**][%][ss]\n1**2%3ss1ss2ss";
-            var writeLineRes = "Result is: " + Add(1, 2, 3, 1, 2);
-            writeRead.Setup(x => x.Read()).Returns(readLine);
-            calculator.Setup(x => x.Add(readLine)).Returns(Add(1, 2, 3, 1, 2));
-            menu = new Menu(writeRead.Object, calculator.Object);
-            //
-            menu.Add();
-            //
-            writeRead.Verify(x => x.Write(writeLineRes), Times.Once);
-            writeRead.Verify(x => x.Write(writeLineNextInput), Times.Once);
-        }
+            var writeLineRes = $"Result is: {expectedRes}";
 
-        private int Add(params int[] n)
-        {
-            int sum = 0;
-            foreach (int i in n)
-            {
-                sum += i;
-            }
-            return sum;
+            _consoleInOut
+                .Setup(x => x.Read())
+                .Returns(readLine);
+            _calculator
+              .Setup(x => x.Add(readLine))
+                .Returns(expectedRes);
+            //act
+            _consoleInterface.CallCalculatorMethodAdd();
+            //assert
+            _consoleInOut.Verify(x => x.Write(writeLineRes), Times.Once);
+            _consoleInOut.Verify(x => x.Write(_writeLineNextInput), Times.Once);
         }
-
     }
 }
