@@ -8,7 +8,7 @@ namespace Calculator.CalculatorLogic
     {
         public IEnumerable<int> Value { get; }
 
-        public NegativeException(string message, List<int> val) : base(message)
+        public NegativeException(string message, IEnumerable<int> val) : base(message)
         {
             Value = val.Where(x => x < 0);
         }
