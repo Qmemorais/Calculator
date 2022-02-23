@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace Calculator.CalculatorLogic
 {
-    public class Calculator:ICalculator
+    public class Calculator
     {
-        public int Add(string numbers)
+        public virtual int Add(string numbers)
         {
             if (numbers.Length == 0)
             {
@@ -18,7 +18,7 @@ namespace Calculator.CalculatorLogic
             return Sum(values);
         }
 
-        private List<int> Delimetres(string stringToSplit)
+        private IEnumerable<int> Delimetres(string stringToSplit)
         {
             string[] valuesString;
 
@@ -29,10 +29,14 @@ namespace Calculator.CalculatorLogic
             {
                 string numbersWhichWillBeSplitting = stringToSplit
                     .Split(splitBySymbolsToFindDelimeter, StringSplitOptions.RemoveEmptyEntries)
-                    .ToList().Last();
+                    .ToList()
+                    .LastOrDefault();
+
                 string StringToSplitOnDelimeters = stringToSplit
                     .Split(splitBySymbolsToFindDelimeter, StringSplitOptions.RemoveEmptyEntries)
-                    .ToList().First();
+                    .ToList()
+                    .FirstOrDefault();
+
                 var valuesWhichSplitNumbers = StringToSplitOnDelimeters
                     .Split(splitDelimetersBuySimbols, StringSplitOptions.RemoveEmptyEntries);
                 valuesString = numbersWhichWillBeSplitting
@@ -45,13 +49,12 @@ namespace Calculator.CalculatorLogic
             }
 
             var values = valuesString
-                .Select(x => int.Parse(x))
-                .ToList();
+                .Select(x => int.Parse(x));
 
             return values;
         }
 
-        private int Sum(List<int> values)
+        private int Sum(IEnumerable<int> values)
         {
             if (values.Any(x => x < 0))
             {
