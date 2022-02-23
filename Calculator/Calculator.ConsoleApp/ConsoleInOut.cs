@@ -2,7 +2,7 @@
 
 namespace Calculator.ConsoleApp
 {
-    public class WriteInformation : IWriteRead
+    public class ConsoleInOut : IConsoleInOut
     {
         public void Write(string toWrite)
         {
