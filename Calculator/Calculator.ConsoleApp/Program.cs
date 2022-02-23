@@ -4,8 +4,9 @@
     {
         static void Main(string[] args)
         {
-            Menu menu = new Menu();
-            menu.Info();
+            ConsoleInterface menu = new ConsoleInterface();
+            
+            menu.Start();
         }
     }
 }
